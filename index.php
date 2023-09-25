@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,15 +27,3 @@
     </div>
 </body>
 </html>
-=======
-<?php 
-
-<<<<<<< HEAD
-echo 'Hello World24';
-=======
-echo 'Hello Joseph
-';
->>>>>>> 908f1c656a2aa1e4843639717d18bf1adf6ea26e
-
-?>
->>>>>>> 0a0f78c05e9445fcb81d6b0d963b0b3843396d47
