@@ -1,3 +1,16 @@
+<?php
+    require_once('db_conn.php');
+    $query = "select * from emp_info";
+    $result = mysqli_query($conn,$query);
+?>
+
+<?php 
+session_start();
+
+if (isset($_SESSION['id']) && isset($_SESSION['email']) && isset($_SESSION['firstname'])) {
+
+ ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,12 +18,12 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Tables / Data - NiceAdmin Bootstrap Template</title>
+  <title>Manage-Employee</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/GG.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -255,7 +268,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="logout.php">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>
@@ -285,18 +298,18 @@
         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-person"></i></i><span>Employees</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <ul id="components-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
           <li>
-            <a href="components-alerts.html">
+            <a href="manage-employee.php" class="active">
               <i class="bi bi-circle"></i><span>Manage Employee</span>
             </a>
           </li>
           <li>
-            <a href="components-accordion.html">
-              <i class="bi bi-circle"></i><span>Accordion</span>
+            <a href="add-employee.php">
+              <i class="bi bi-circle"></i><span>Add Employee</span>
             </a>
           </li>
-          <li>
+          <!-- <li>
             <a href="components-badges.html">
               <i class="bi bi-circle"></i><span>Badges</span>
             </a>
@@ -305,13 +318,13 @@
             <a href="components-breadcrumbs.html">
               <i class="bi bi-circle"></i><span>Breadcrumbs</span>
             </a>
-          </li>
-          <li>
+          </li> -->
+          <!-- <li>
             <a href="components-buttons.html">
               <i class="bi bi-circle"></i><span>Buttons</span>
             </a>
           </li>
-          <li>
+          <li> -->
             <!-- <a href="components-cards.html">
               <i class="bi bi-circle"></i><span>Cards</span>
             </a>
@@ -363,7 +376,7 @@
         <!-- <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-journal-text"></i><span>Payroll</span><i class="bi bi-chevron-down ms-auto"></i>
         </a> -->
-        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
           <li>
             <a href="manage-employee.php">
               <i class="bi bi-circle"></i><span>Manage Payroll</span>
@@ -391,15 +404,15 @@
         <a class="nav-link " data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-journal-medical"></i></i><span>Payroll</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="tables-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+        <ul id="tables-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
           <!-- <li>
             <a href="tables-general.html">
               <i class="bi bi-circle"></i><span>General Tables</span>
             </a>
           </li>
           <li> -->
-            <a href="manage-employee.php" class="active">
-              <i class="bi bi-circle"></i><span>Data Tables</span>
+            <a href="manage-payroll.php">
+              <i class="bi bi-circle"></i><span>Manage Payroll</span>
             </a>
           </li>
         </ul>
@@ -504,12 +517,11 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Data Tables</h1>
+      <h1>Manage Employee</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item">Tables</li>
-          <li class="breadcrumb-item active">Data</li>
+          <li class="breadcrumb-item active">Employee Data</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -521,55 +533,35 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Employees</h5>
-              <p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable</p>
-
+             
               <!-- Table with stripped rows -->
               <table class="table datatable">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
+                    <th scope="col"></th>
+                    <th scope="col">ID</th>
                     <th scope="col">Name</th>
                     <th scope="col">Position</th>
-                    <th scope="col">Age</th>
-                    <th scope="col">Start Date</th>
-                  </tr>
+                    <th scope="col">Status
                 </thead>
                 <tbody>
+                <?php
+                            
+                            while($row = mysqli_fetch_assoc($result))
+                            {
+                     ?>
                   <tr>
-                    <th scope="row">1</th>
-                    <td>Brandon Jacob</td>
-                    <td>Designer</td>
-                    <td>28</td>
-                    <td>2016-05-25</td>
+                    <th scope="row"></th>
+                    
+                                <th><?php echo $row['id']?></th>
+                                <td><?php echo $row['firstname']?> <?php echo $row['lastname']?></td>
+                                <td><?php echo $row['designation']?>
+                                <td><?php echo $row['status']?>
                   </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Bridie Kessler</td>
-                    <td>Developer</td>
-                    <td>35</td>
-                    <td>2014-12-05</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Ashleigh Langosh</td>
-                    <td>Finance</td>
-                    <td>45</td>
-                    <td>2011-08-12</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">4</th>
-                    <td>Angus Grady</td>
-                    <td>HR</td>
-                    <td>34</td>
-                    <td>2012-06-11</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">5</th>
-                    <td>Raheem Lehner</td>
-                    <td>Dynamic Division Officer</td>
-                    <td>47</td>
-                    <td>2011-04-19</td>
-                  </tr>
+                     <?php
+                                }
+
+                      ?>         
                 </tbody>
               </table>
               <!-- End Table with stripped rows -->
@@ -586,16 +578,17 @@
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
-      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+      &copy; Copyright <strong><span>Arrowgo-Logistics Inc.</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
       <!-- All the links in the footer should remain intact. -->
       <!-- You can delete the links only if you purchased the pro version. -->
       <!-- Licensing information: https://bootstrapmade.com/license/ -->
       <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        <a href="https://www.arrowgologistics.com/">Arrowgo-Logistics Inc.</a>© 2020-2025
     </div>
   </footer><!-- End Footer -->
+
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
@@ -615,3 +608,10 @@
 </body>
 
 </html>
+
+<?php 
+}else{
+     header("Location: index.php");
+     exit();
+}
+ ?>

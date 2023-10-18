@@ -1,3 +1,15 @@
+<?php
+    require_once('db_conn.php');
+    $query = "select * from emp_info";
+    $result = mysqli_query($conn,$query);
+?>
+
+<?php 
+session_start();
+
+if (isset($_SESSION['id']) && isset($_SESSION['email']) && isset($_SESSION['firstname'])) {
+
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +22,7 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/GG.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -46,7 +58,7 @@
     <div class="d-flex align-items-center justify-content-between">
       <a href="dashboard-admin.php" class="logo d-flex align-items-center">
         <img src="assets/img/GG.png" alt="">
-        <span class="d-none d-lg-block">CHRIS</span>
+        <span class="d-none d-lg-block">HRIS</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -217,8 +229,8 @@
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
-              <span>Web Designer</span>
+              <h6><?php echo $_SESSION['firstname']; ?></h6>
+              <span><?php echo $_SESSION['email']?></span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -287,7 +299,7 @@
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="components-alerts.html">
+            <a href="manage-employee.php">
               <i class="bi bi-circle"></i><span>Manage Employee</span>
             </a>
           </li>
@@ -296,7 +308,7 @@
               <i class="bi bi-circle"></i><span>Add Employee</span>
             </a>
           </li>
-          <li>
+          <!-- <li>
             <a href="components-badges.html">
               <i class="bi bi-circle"></i><span>Badges</span>
             </a>
@@ -304,7 +316,7 @@
           <li>
             <a href="components-breadcrumbs.html">
               <i class="bi bi-circle"></i><span>Breadcrumbs</span>
-            </a>
+            </a> -->
           <!-- </li>
           <li>
             <a href="components-buttons.html">
@@ -391,15 +403,15 @@
         <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-journal-medical"></i><span>Payroll</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <ul id="tables-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
           <!-- <li>
             <a href="tables-general.html">
               <i class="bi bi-circle"></i><span>General Tables</span>
             </a>
           </li> -->
           <li>
-            <a href="manage-employee.php">
-              <i class="bi bi-circle"></i><span>Data Tables</span>
+            <a href="manage-payroll.php">
+              <i class="bi bi-circle"></i><span>Manage Payroll</span>
             </a>
           </li>
         </ul>
@@ -1157,14 +1169,14 @@
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
-      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+      &copy; Copyright <strong><span>Arrowgo-Logistics Inc.</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
       <!-- All the links in the footer should remain intact. -->
       <!-- You can delete the links only if you purchased the pro version. -->
       <!-- Licensing information: https://bootstrapmade.com/license/ -->
       <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        <a href="https://www.arrowgologistics.com/">Arrowgo-Logistics Inc.</a>© 2020-2025
     </div>
   </footer><!-- End Footer -->
 
@@ -1186,3 +1198,9 @@
 </body>
 
 </html>
+<?php 
+}else{
+     header("Location: index.php");
+     exit();
+}
+ ?>
