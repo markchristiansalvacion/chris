@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -275,7 +278,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="admin_dashboard.php">
+        <a class="nav-link " href="index.php">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -507,12 +510,12 @@
   </aside><!-- End Sidebar-->
 
   <main id="main" class="main">
-
+    <?php include('message.php')?>
     <div class="pagetitle">
       <h1>Add Employee</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="admin_dashboard.php">Home</a></li>
+          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
           <li class="breadcrumb-item active">Add Employee</li>
         </ol>
       </nav>
@@ -526,61 +529,61 @@
               <h5 class="card-title">Add New Employee</h5>
 
               <!-- General Form Elements -->
-              <form>
+              <form action="admin_add_employee_proc.php" method="post" class="needs-validation" novalidate>
                 <div class="row mb-3">
-                  <label for="inputText" class="col-sm-2 col-form-label">Firstname</label>
+                  <label for="inputText" class="col-sm-2 col-form-label" >Firstname</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="firstname">
                   </div>
                 </div>
                 <div class="row mb-3">
-                  <label for="inputText" class="col-sm-2 col-form-label">Middlename</label>
+                  <label for="inputText" class="col-sm-2 col-form-label" >Middlename</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="middlename">
                   </div>
                 </div>
                 <div class="row mb-3">
-                  <label for="inputText" class="col-sm-2 col-form-label">Lastname</label>
+                  <label for="inputText" class="col-sm-2 col-form-label"  >Lastname</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="lastname">
                   </div>
                 </div>
                 <div class="row mb-3">
-                  <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                  <label for="inputEmail" class="col-sm-2 col-form-label" >Email</label>
                   <div class="col-sm-10">
-                    <input type="email" class="form-control">
+                    <input type="email" class="form-control" name="email">
                   </div>
                 </div>
                 <div class="row mb-3">
-                  <label for="inputEmail" class="col-sm-2 col-form-label">Emp No.</label>
+                  <label for="inputEmail" class="col-sm-2 col-form-label" >Emp No.</label>
                   <div class="col-sm-10">
-                    <input type="email" class="form-control">
+                    <input type="text" class="form-control" name="designation">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
                   <div class="col-sm-10">
-                    <input type="password" class="form-control">
+                    <input type="password" class="form-control" name="password">
                   </div>
                 </div>
-                <div class="row mb-3">
-                  <label for="inputNumber" class="col-sm-2 col-form-label">Contact Number</label>
+                <!-- <div class="row mb-3">
+                  <label for="inputNumber" class="col-sm-2 col-form-label" name="contact">Contact Number</label>
                   <div class="col-sm-10">
                     <input type="number" class="form-control">
                   </div>
                 </div>
                 <div class="row mb-3">
-                  <label for="inputNumber" class="col-sm-2 col-form-label">File Upload</label>
+                  <label for="inputNumber" class="col-sm-2 col-form-label" name="photo" >File Upload</label>
                   <div class="col-sm-10">
                     <input class="form-control" type="file" id="formFile">
                   </div>
                 </div>
                 <div class="row mb-3">
-                  <label for="inputDate" class="col-sm-2 col-form-label">Date-Started</label>
+                  <label for="inputDate" class="col-sm-2 col-form-label" name="dats">Date-Started</label>
                   <div class="col-sm-10">
                     <input type="date" class="form-control">
                   </div>
-                </div>
+                </div> -->
                 <!-- <div class="row mb-3">
                   <label for="inputTime" class="col-sm-2 col-form-label">Time</label>
                   <div class="col-sm-10">
@@ -600,7 +603,7 @@
                     <textarea class="form-control" style="height: 100px"></textarea>
                   </div>
                 </div> -->
-                <fieldset class="row mb-3">
+                <!-- <fieldset class="row mb-3">
                   <legend class="col-form-label col-sm-2 pt-0">Gender</legend>
                   <div class="col-sm-10">
                     <div class="form-check">
@@ -614,7 +617,7 @@
                       <label class="form-check-label" for="gridRadios2">
                         Female
                       </label>
-                    </div>
+                    </div> -->
                     <!-- <div class="form-check disabled">
                       <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios" value="option" disabled>
                       <label class="form-check-label" for="gridRadios3">
@@ -678,7 +681,7 @@
                 <div class="row mb-3">
                   <label class="col-sm-2 col-form-label">Submit Button</label>
                   <div class="col-sm-10">
-                    <button type="submit" class="btn btn-primary">Submit Form</button>
+                    <button type="submit" class="btn btn-primary" name="save_student">Submit Form</button>
                   </div>
                 </div>
 
@@ -689,21 +692,21 @@
 
         </div>
 
-        <div class="col-lg-6">
+        <!-- <div class="col-lg-6"> -->
 
-          <div class="card">
+          <!-- <div class="card">
             <div class="card-body">
-              <h5 class="card-title">More Info</h5>
+              <h5 class="card-title">More Info</h5> -->
 
               <!-- Advanced Form Elements -->
-              <form>
+              <!-- <form>
                 <div class="row mb-5">
                   <label class="col-sm-2 col-form-label">Status</label>
                   <div class="col-sm-10">
                     <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
                       <label class="form-check-label" for="flexSwitchCheckDefault">Active</label>
-                    </div>
+                    </div> -->
                     <!-- <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
                       <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label>
@@ -739,7 +742,7 @@
 
                 <div class="row mb-3">
                   <!-- <label class="col-sm-2 col-form-label">Floating labels</label> -->
-                  <div class="col-sm-10">
+                  <!-- <div class="col-sm-10">
                     <div class="form-floating mb-3">
                       <input type="email" class="form-control" id="floatingInput" placeholder="sss">
                       <label for="floatingInput">Sss</label>
@@ -755,7 +758,7 @@
                     <div class="form-floating mb-3">
                       <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
                       <label for="floatingInput">Tin</label>
-                    </div>
+                    </div> -->
                     <!-- <div class="form-floating mb-3">
                       <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
                       <label for="floatingPassword">Password</label> -->
@@ -764,7 +767,7 @@
                       <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="height: 100px;"></textarea>
                       <label for="floatingTextarea">Comments</label>
                     </div> -->
-                    <div class="form-floating mb-3">
+                    <!-- <div class="form-floating mb-3">
                       <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
                         <option selected>Open this select menu</option>
                         <option value="1">One</option>
@@ -774,9 +777,9 @@
                       <label for="floatingSelect">Works with selects</label>
                     </div>
                   </div>
-                </div>
+                </div> -->
 
-                <div class="row mb-5">
+                <!-- <div class="row mb-5">
                   <label class="col-sm-2 col-form-label">Input groups</label>
                   <div class="col-sm-10">
                     <div class="input-group mb-3">
@@ -787,7 +790,7 @@
                     <div class="input-group mb-3">
                       <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
                       <span class="input-group-text" id="basic-addon2">@example.com</span>
-                    </div>
+                    </div> -->
 
                     <!-- <label for="basic-url" class="form-label">Your vanity URL</label>
                     <div class="input-group mb-3">

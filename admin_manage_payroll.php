@@ -3,14 +3,6 @@
     $query = "select * from emp_info";
     $result = mysqli_query($conn,$query);
 ?>
-
-<?php 
-session_start();
-
-if (isset($_SESSION['id']) && isset($_SESSION['email']) && isset($_SESSION['firstname'])) {
-
- ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -552,7 +544,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email']) && isset($_SESSION['firs
                      ?>
                   <tr>
                     <th scope="row"></th>
-                    
+                                
                                 <th><?php echo $row['id']?></th>
                                 <td><?php echo $row['firstname']?> <?php echo $row['lastname']?></td>
                                 <td><?php echo $row['designation']?>
@@ -610,8 +602,3 @@ if (isset($_SESSION['id']) && isset($_SESSION['email']) && isset($_SESSION['firs
 </html>
 
 <?php 
-}else{
-     header("Location: index.php");
-     exit();
-}
- ?>

@@ -4,80 +4,82 @@
 if (isset($_POST)) {
   if (are_fields_filled($_POST)) {
 
-    $user_name = $db->escape_string($_POST['loginUsername']);
-    $user_pass = $db->escape_string($_POST['loginPassword']);
+    $email = $db->escape_string($_POST['uname']);
+    $password = $db->escape_string($_POST['password']);
+	print_r($password);
 
-    $db_num_row = $db->query('SELECT * FROM tb_users where user_name = ?', $user_name)->num_rows();
-    //print_r_html($db_num_row);
+    $db_num_row = $db->query('SELECT * FROM emp_info where email = ?', $email)->num_rows();
+    print_r_html($db_num_row);
 
     if ($db_num_row) {
 
 
-      $db_row = $db->query('SELECT * FROM tb_users where user_name = ?', $user_name)->fetch_array();
+      $db_row = $db->query('SELECT * FROM emp_info where email = ?', $email)->fetch_array();
+	  print_r($db_row);
       /** Verify Password */
-      if (password_verify($user_pass, $db_row['user_password'])) {
+      if (password_verify($password, $db_row['password'])) {
 
 
-        if ($db_row['user_type'] == 'admin' || $db_row['user_type'] == 'inbound' || $db_row['user_type'] == 'outbound' || $db_row['user_type'] == 'inventory' || $db_row['user_type'] == 'viewer' || $db_row['user_type'] == 'transport') {
+        if ($db_row['role'] == 'Admin') {
 
-          $_SESSION['user_id'] = $db_row['user_id'];
-          $_SESSION['name'] = $db_row['name'];
-          $_SESSION['user_type'] = $db_row['user_type'];
-          $_SESSION['user_status'] = $db_row['user_status'];
-          $_SESSION['user_password'] = $db_row['user_password'];
-          $_SESSION['photo'] = $db_row['photo'];
+          $_SESSION['id'] = $db_row['id'];
+          $_SESSION['firstname'] = $db_row['firstname'];
+          $_SESSION['role'] = $db_row['role'];
+          $_SESSION['status'] = $db_row['status'];
+          $_SESSION['password'] = $db_row['password'];
+          
 
           $_SESSION['login_time'] = time();
 
 
-
-          redirect("index", false);
+			echo ("SUCESS_index");
+          redirect("index.php", false);
         }
-        if ($db_row['user_type'] == 'inbound checker' || $db_row['user_type'] == 'picker' || $db_row['user_type'] == 'operator' || $db_row['user_type'] == 'outbound checker' || $db_row['user_type'] == 'validator') {
-          $_SESSION['user_id'] = $db_row['user_id'];
-          $_SESSION['name'] = $db_row['name'];
-          $_SESSION['user_type'] = $db_row['user_type'];
-          $_SESSION['user_status'] = $db_row['user_status'];
-          $_SESSION['user_password'] = $db_row['user_password'];
-          $_SESSION['photo'] = $db_row['photo'];
-
+        if ($db_row['role'] == 'Employee') {
+			$_SESSION['id'] = $db_row['id'];
+			$_SESSION['firstname'] = $db_row['firstname'];
+			$_SESSION['role'] = $db_row['role'];
+			$_SESSION['status'] = $db_row['status'];
+			$_SESSION['password'] = $db_row['password'];
+			
           $_SESSION['login_time'] = time();
 
-  
+		  echo ("SUCESS_user");
 
-          redirect("index_user", false);
+           redirect("users_profile.php", false);
         }
-        if ($db_row['user_type'] == 'main guard') {
-          $_SESSION['user_id'] = $db_row['user_id'];
-          $_SESSION['name'] = $db_row['name'];
-          $_SESSION['user_type'] = $db_row['user_type'];
-          $_SESSION['user_status'] = $db_row['user_status'];
-          $_SESSION['user_password'] = $db_row['user_password'];
-          $_SESSION['photo'] = $db_row['photo'];
+        if ($db_row['role'] == 'main guard') {
+        	$_SESSION['id'] = $db_row['id'];
+			$_SESSION['firstname'] = $db_row['firstname'];
+			$_SESSION['role'] = $db_row['role'];
+			$_SESSION['status'] = $db_row['status'];
+			$_SESSION['password'] = $db_row['password'];
 
           $_SESSION['login_time'] = time();
+		  echo ("SUCESS");
 
-
-          redirect("index_main_guard", false);
+           redirect("index_main_guard", false);
         }
       } else {
         $_SESSION['msg_heading'] = "Transaction Error!";
         $_SESSION['msg'] = "Wrong Password!";
         $_SESSION['msg_type'] = "error";
-        redirect("login", false);
+		echo ("wrong pass");
+        redirect("login.php", false);
       }
     } else {
       $_SESSION['msg_heading'] = "Transaction Error!";
       $_SESSION['msg'] = "User doesn't exist!";
       $_SESSION['msg_type'] = "error";
-      redirect("login", false);
+      redirect("login.php", false);
+	echo ("does not exist");
     }
   } else {
     $_SESSION['msg_heading'] = "Transaction Error!";
     $_SESSION['msg'] = "Please fill up all fields";
     $_SESSION['msg_type'] = "error";
 
-    redirect("login", false);
+     redirect("login.php", false);
   }
 }
 ?>

@@ -1,15 +1,12 @@
+
 <?php
     require_once('db_conn.php');
     $query = "select * from emp_info";
     $result = mysqli_query($conn,$query);
 ?>
 
-<?php 
-session_start();
 
-if (isset($_SESSION['id']) && isset($_SESSION['email']) && isset($_SESSION['firstname'])) {
 
- ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -57,7 +54,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email']) && isset($_SESSION['firs
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="admin_dashboard.php" class="logo d-flex align-items-center">
+      <a href="index.php" class="logo d-flex align-items-center">
         <img src="assets/img/GG.png" alt="">
         <span class="d-none d-lg-block">HRIS</span>
       </a>
@@ -288,7 +285,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email']) && isset($_SESSION['firs
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="admin_dashboard.php">
+        <a class="nav-link collapsed" href="index.php">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -520,7 +517,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['email']) && isset($_SESSION['firs
       <h1>Manage Employee</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="admin_dashboard.php">Home</a></li>
+          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
           <li class="breadcrumb-item active">Employee Data</li>
         </ol>
       </nav>
@@ -542,7 +539,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['email']) && isset($_SESSION['firs
                     <th scope="col">ID</th>
                     <th scope="col">Name</th>
                     <th scope="col">Position</th>
-                    <th scope="col">Status
+                    <th scope="col">Role</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Status</th>
+                    
+                    
                 </thead>
                 <tbody>
                 <?php
@@ -556,7 +557,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['email']) && isset($_SESSION['firs
                                 <th><?php echo $row['id']?></th>
                                 <td><?php echo $row['firstname']?> <?php echo $row['lastname']?></td>
                                 <td><?php echo $row['designation']?>
+                                <td><?php echo $row['role']?>
+                                <td><?php echo $row['email']?>
                                 <td><?php echo $row['status']?>
+
                   </tr>
                      <?php
                                 }
@@ -608,10 +612,3 @@ if (isset($_SESSION['id']) && isset($_SESSION['email']) && isset($_SESSION['firs
 </body>
 
 </html>
-
-<?php 
-}else{
-     header("Location: index.php");
-     exit();
-}
- ?>
